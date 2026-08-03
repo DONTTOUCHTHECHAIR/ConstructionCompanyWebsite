@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router';
+import { HashRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown, ArrowRight, Home as HomeIcon, Hammer, Ruler, Phone, Mail, MapPin, Award, ShieldCheck } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { clsx, type ClassValue } from 'clsx';
@@ -471,7 +471,7 @@ function About() {
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -480,6 +480,6 @@ export default function App() {
           <Route path="/about" element={<About />} />
         </Routes>
       </Layout>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
