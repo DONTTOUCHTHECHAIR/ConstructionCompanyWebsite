@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { HashRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router';
 import { Menu, X, ChevronDown, ArrowRight, Home as HomeIcon, Hammer, Ruler, Phone, Mail, MapPin, Award, ShieldCheck } from 'lucide-react';
+import logoUrl from '../assets/logo.png';
 import { motion, AnimatePresence } from 'motion/react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -25,13 +26,10 @@ function Navbar() {
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-md">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center bg-primary text-primary-foreground">
-              <HomeIcon size={20} />
-            </div>
-            <Link to="/" className="font-display text-xl font-bold tracking-wider">
-              OC <span className="text-primary">SOLID GROUND</span>
+        <div className="flex h-20 items-center justify-between">
+          <div className="flex items-center gap-4">
+            <Link to="/" className="font-display text-2xl font-bold tracking-wider">
+              <span className="text-primary">OC</span> <span className="text-muted-foreground">SOLID GROUND</span>
             </Link>
           </div>
           <div className="hidden md:block">
@@ -101,11 +99,12 @@ function Footer() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="flex h-6 w-6 items-center justify-center bg-primary text-primary-foreground">
-                <HomeIcon size={14} />
-              </div>
-              <span className="font-display text-lg font-bold tracking-wider">OC SOLID GROUND</span>
+            <div className="flex items-center gap-4 mb-6">
+              <img src={logoUrl} alt="OC Solid Ground" className="h-24 w-auto" />
+              <span className="font-display text-xl font-bold tracking-wider">
+                <span className="text-primary">OC</span> <br/>
+                <span className="text-muted-foreground">SOLID GROUND</span>
+              </span>
             </div>
             <p className="text-muted-foreground text-sm max-w-xs">
               Building your dreams on solid ground with exceptional craftsmanship, integrity, and a personal touch.
@@ -114,17 +113,16 @@ function Footer() {
           <div>
             <h4 className="mb-4 font-display text-sm tracking-widest text-muted-foreground">CONTACT</h4>
             <ul className="space-y-2 text-sm">
-              <li className="flex items-center gap-2"><Phone size={14} className="text-primary"/> +1 (555) 123-4567</li>
+              <li className="flex items-center gap-2"><Phone size={14} className="text-primary"/> (941) 724-7875</li>
               <li className="flex items-center gap-2"><Mail size={14} className="text-primary"/> info@ocsolidground.com</li>
-              <li className="flex items-center gap-2"><MapPin size={14} className="text-primary"/> Orange County, CA</li>
+              <li className="flex items-center gap-2"><MapPin size={14} className="text-primary"/> Sarasota, FL</li>
             </ul>
           </div>
           <div>
             <h4 className="mb-4 font-display text-sm tracking-widest text-muted-foreground">LEGAL</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-primary">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-primary">Terms of Service</a></li>
-              <li><a href="#" className="hover:text-primary">Contractor License #1049284</a></li>
+              <li><Link to="/privacy-policy" className="hover:text-primary">Privacy Policy</Link></li>
+              <li><a href="#" className="hover:text-primary">Contractor License</a></li>
             </ul>
           </div>
         </div>
@@ -194,12 +192,11 @@ function Home() {
       {/* Stats Section */}
       <section className="border-y border-border bg-card py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
             {[
-              { label: 'PROJECTS COMPLETED', value: '150+' },
-              { label: 'YEARS EXPERIENCE', value: '15+' },
+              { label: 'PROJECTS COMPLETED', value: '1500+' },
+              { label: 'YEARS EXPERIENCE', value: '20+' },
               { label: 'CLIENT SATISFACTION', value: '100%' },
-              { label: 'EXPERT CRAFTSMEN', value: '12' },
             ].map((stat, i) => (
               <div key={i} className="text-center md:text-left">
                 <div className="font-display text-4xl font-bold text-primary mb-2">{stat.value}</div>
@@ -229,11 +226,6 @@ function Services() {
       id: '03',
       title: 'Outdoor Living & Barns',
       description: 'Enhance your property with custom barns, workshops, expansive decking, and beautiful outdoor entertaining areas. We specialize in rural property structures that are as durable as they are visually stunning.'
-    },
-    {
-      id: '04',
-      title: 'Civil & Property Improvements',
-      description: 'We handle the groundwork. From land grading and excavation to driveway installations and structural renovations, we ensure all your property improvements start on solid ground with proper drainage and stability.'
     }
   ];
 
@@ -244,7 +236,7 @@ function Services() {
       <div className="mb-16">
         <h1 className="mb-4 text-4xl md:text-5xl">Our Services</h1>
         <p className="text-muted-foreground text-lg max-w-2xl">
-          Specializing in residential and civil improvements. We bring expertise, transparency, and a relentless work ethic to every home we touch.
+          Specializing in residential improvements. We bring expertise, transparency, and a relentless work ethic to every home we touch.
         </p>
       </div>
 
@@ -285,9 +277,9 @@ function Services() {
                       <p className="text-muted-foreground leading-relaxed">
                         {service.description}
                       </p>
-                      <button className="mt-6 flex items-center gap-2 font-display text-sm tracking-widest text-primary hover:text-foreground transition-colors">
+                      <Link to="/about" className="mt-6 inline-flex items-center gap-2 font-display text-sm tracking-widest text-primary hover:text-foreground transition-colors">
                         REQUEST QUOTE <ArrowRight size={14} />
-                      </button>
+                      </Link>
                     </div>
                   </motion.div>
                 )}
@@ -390,9 +382,6 @@ function About() {
       <div className="mb-20 grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-8">
         <div>
           <h1 className="mb-6 text-4xl md:text-5xl">Craftsmanship Rooted in the Community</h1>
-          <p className="text-lg text-muted-foreground mb-6">
-            Since <strong className="text-foreground">1998</strong>, OC Solid Ground Construction Group has been a dedicated team of craftsmen. We don't just build structures; we create homes and improve properties with a focus on quality, integrity, and a personal touch.
-          </p>
           <div className="flex flex-wrap gap-4">
             <div className="flex items-center gap-2 border border-border bg-card px-4 py-2">
               <ShieldCheck className="text-primary" size={20} />
@@ -426,42 +415,56 @@ function About() {
             <h2 className="text-2xl">Service Area</h2>
           </div>
           <p className="text-muted-foreground mb-6">
-            Based locally, our operational reach extends across Orange County and into surrounding rural communities. We are fully equipped for custom residential builds and civil property improvements throughout the region.
+            Based locally, our operational reach extends across Sarasota and into surrounding rural communities. We are fully equipped for custom residential builds throughout the region.
           </p>
-          <ul className="space-y-3 font-display text-sm tracking-widest">
-            <li className="flex items-center gap-2 text-foreground"><div className="h-1.5 w-1.5 bg-primary rounded-full"/> ORANGE COUNTY</li>
-            <li className="flex items-center gap-2 text-muted-foreground"><div className="h-1.5 w-1.5 bg-border rounded-full"/> RURAL COMMUNITIES</li>
-            <li className="flex items-center gap-2 text-muted-foreground"><div className="h-1.5 w-1.5 bg-border rounded-full"/> SURROUNDING REGIONS</li>
-          </ul>
         </div>
 
         {/* Contact Area */}
         <div className="bg-card border border-border p-8">
           <h2 className="text-2xl mb-6">Contact Us</h2>
-          <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <label className="font-display text-xs tracking-widest text-muted-foreground">FIRST NAME</label>
-                <input type="text" className="w-full bg-input-background border border-border px-4 py-2 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-foreground" />
+          <div className="space-y-8">
+            <div className="flex items-center gap-4">
+              <div className="flex h-12 w-12 items-center justify-center bg-muted text-primary rounded-full">
+                <Phone size={24} />
               </div>
-              <div className="space-y-2">
-                <label className="font-display text-xs tracking-widest text-muted-foreground">LAST NAME</label>
-                <input type="text" className="w-full bg-input-background border border-border px-4 py-2 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-foreground" />
+              <div>
+                <div className="font-display text-xs tracking-widest text-muted-foreground mb-1">CALL US</div>
+                <div className="text-lg text-foreground font-medium">(941) 724-7875</div>
               </div>
             </div>
-            <div className="space-y-2">
-              <label className="font-display text-xs tracking-widest text-muted-foreground">EMAIL ADDRESS</label>
-              <input type="email" className="w-full bg-input-background border border-border px-4 py-2 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors text-foreground" />
+            <div className="flex items-center gap-4">
+              <div className="flex h-12 w-12 items-center justify-center bg-muted text-primary rounded-full">
+                <Mail size={24} />
+              </div>
+              <div>
+                <div className="font-display text-xs tracking-widest text-muted-foreground mb-1">EMAIL US</div>
+                <div className="text-lg text-foreground font-medium">info@ocsolidground.com</div>
+              </div>
             </div>
-            <div className="space-y-2">
-              <label className="font-display text-xs tracking-widest text-muted-foreground">PROJECT DETAILS</label>
-              <textarea rows={4} className="w-full bg-input-background border border-border px-4 py-2 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors resize-none text-foreground"></textarea>
+            <div className="pt-4 border-t border-border">
+              <a 
+                href="mailto:info@ocsolidground.com" 
+                className="flex w-full items-center justify-center bg-primary text-primary-foreground font-display text-sm font-bold tracking-widest py-4 hover:bg-primary/90 transition-colors"
+              >
+                SEND AN EMAIL
+              </a>
             </div>
-            <button className="w-full bg-primary text-primary-foreground font-display text-sm font-bold tracking-widest py-4 mt-2 hover:bg-primary/90 transition-colors">
-              SUBMIT INQUIRY
-            </button>
-          </form>
+          </div>
         </div>
+      </div>
+    </div>
+  );
+}
+
+function PrivacyPolicy() {
+  return (
+    <div className="mx-auto max-w-4xl px-4 py-24 sm:px-6 lg:px-8 min-h-[60vh]">
+      <h1 className="mb-8 text-4xl md:text-5xl">Privacy Policy</h1>
+      <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
+        <p>The website does not collect personal information directly.</p>
+        <p>The site uses Cloudflare Web Analytics to collect anonymous, aggregated usage statistics.</p>
+        <p>No cookies are used for analytics.</p>
+        <p>No personal information is sold or shared.</p>
       </div>
     </div>
   );
@@ -471,15 +474,16 @@ function About() {
 
 export default function App() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/services" element={<Services />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/about" element={<About />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         </Routes>
       </Layout>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
